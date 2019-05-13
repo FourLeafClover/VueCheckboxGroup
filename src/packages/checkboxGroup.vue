@@ -31,7 +31,7 @@ export default {
     },
     isSingleValueArray: {
       type: Boolean,
-      default: false // 1是array,0是对象或者字符串
+      default: false // 单选的时候v-model是否是数组 1是array,0是对象或者字符串
     },
     disabled: { // checkboxGroup是否禁用
       type: Boolean,
