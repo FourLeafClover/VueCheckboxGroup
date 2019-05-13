@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h3>自定义Value:Function</h3>
+    <h3>部分禁用</h3>
     <checkboxGroup
       :options="options"
       v-model="selected"
       optionLabel="name"
       :optionValue="optionValue"
+      :disabledOptions='[this.options[0],this.options[2]]'
     ></checkboxGroup>
     <div>选中值:{{selected}}</div>
   </div>

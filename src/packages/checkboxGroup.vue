@@ -6,6 +6,7 @@
       :value="isChecked(item)"
       @onChange="(event)=>onOptionChange(item,event)"
       :key="index"
+      :disabled="getOptionDisabled(item)"
     >{{getOptionLabel(item)}}</checkbox>
   </div>
 </template>
@@ -32,6 +33,14 @@ export default {
       type: Boolean,
       default: false // 1是array,0是对象或者字符串
     },
+    disabled: { // checkboxGroup是否禁用
+      type: Boolean,
+      default: false
+    },
+    disabledOptions: { // 禁用某些项
+      type: Array,
+      default: () => []
+    },
     optionLabel: null,
     optionValue: null
   },
@@ -41,6 +50,12 @@ export default {
     }
   },
   methods: {
+    getOptionDisabled(item) {
+      return this.disabled || // 全局disabled
+      this.disabledOptions.findIndex(x => x === item) >= 0 || // 判断Item是否在禁用里面
+      this.disabledOptions.findIndex(x => this.getOptionValue(x) === this.getOptionValue(item)) >= 0
+      // 这里主要是为了防止用户在设置禁用的时候对禁用对象做了一次拷贝。随意还是通过getOptionValue再判断一次
+    },
     updateValue() {
       let values = null
       if (this.isMutiple || this.isSingleValueArray) {

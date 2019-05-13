@@ -2,12 +2,11 @@
   <label
     class="v-checkbox-item"
     :class="{
-      'v-checkbox-item-checked':value
+      'v-checkbox-item-checked':value,
+      'disabled':disabled
     }"
-    @click="toggleCheck"
   >
-    <span class="v-checkbox">
-      <input type="checkbox" class="v-checkbox-input">
+    <span class="v-checkbox" @click="toggleCheck">
       <span class="v-checkbox-inner"></span>
     </span>
     <span class="v-checkbox-label">
@@ -21,12 +20,17 @@ export default {
     value: {
       type: Boolean,
       default: false
+    },
+    disabled: {
+      type: Boolean
     }
   },
   methods: {
     toggleCheck() {
-      this.$emit('update:input', !this.value)
-      this.$emit('onChange', !this.value)
+      if (!this.disabled) {
+        this.$emit('update:input', !this.value)
+        this.$emit('onChange', !this.value)
+      }
     }
   }
 }
@@ -60,18 +64,6 @@ export default {
     vertical-align: middle;
     outline: none;
     cursor: pointer;
-    .v-checkbox-input {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-      opacity: 0;
-    }
     .v-checkbox-inner {
       position: relative;
       top: 0;
@@ -89,19 +81,31 @@ export default {
   .v-checkbox-label {
     padding-left: 5px;
   }
-}
-
-.v-checkbox-item-checked {
-  .v-checkbox-inner:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: " ";
-    background-color: #1890ff;
-    background-image: url("./assets/input-checked.png");
-    background-size: cover;
+  &.v-checkbox-item-checked {
+    .v-checkbox-inner:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: " ";
+      background-color: #1890ff;
+      background-image: url("./assets/input-checked.png");
+      background-size: cover;
+    }
+  }
+  &.disabled {
+    cursor: no-drop;
+    color: #aaa;;
+    .v-checkbox {
+      cursor: no-drop;
+      .v-checkbox-inner{
+        border-color:#aaa;
+        &:after{
+          background-color: #aaa;
+        }
+      }
+    }
   }
 }
 </style>
