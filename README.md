@@ -25,11 +25,11 @@ npm install v-checkbox-group -D
     event: 'onChange'
   },
   props: {
-    options: {
+    options: {  // 绑定数据源
       type: Array,
       default: () => []
     },
-    checked: null,
+    checked: null, // 用于v-model
     isMutiple: {
       // 是否支持多选
       type: Boolean,
@@ -47,8 +47,8 @@ npm install v-checkbox-group -D
       type: Array,
       default: () => []
     },
-    optionLabel: null,
-    optionValue: null
+    optionLabel: null, // 支持为空,string和function
+    optionValue: null // 支持为空,string和function
   },
 </pre>
 

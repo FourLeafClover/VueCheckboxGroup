@@ -6,9 +6,16 @@
       v-model="selected"
       optionLabel="name"
       :optionValue="optionValue"
-      :disabledOptions='[this.options[0],this.options[2]]'
+      :disabledOptions="[this.options[0],this.options[2]]"
     ></checkboxGroup>
-    <div>选中值:{{selected}}</div>
+    <br/>
+    <checkboxGroup
+      :options="options"
+      v-model="selected"
+      optionLabel="name"
+      optionValue="id"
+      :disabledOptions="[1,3]"
+    ></checkboxGroup>
   </div>
 </template>
 <script>
@@ -21,15 +28,15 @@ export default {
     return {
       options: [
         {
-          id: '1',
+          id: 1,
           name: 'Frank'
         },
         {
-          id: '2',
+          id: 2,
           name: 'Jack'
         },
         {
-          id: '3',
+          id: 3,
           name: 'Mars'
         }
       ],

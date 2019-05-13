@@ -33,11 +33,13 @@ export default {
       type: Boolean,
       default: false // 单选的时候v-model是否是数组 1是array,0是对象或者字符串
     },
-    disabled: { // checkboxGroup是否禁用
+    disabled: {
+      // checkboxGroup是否禁用
       type: Boolean,
       default: false
     },
-    disabledOptions: { // 禁用某些项
+    disabledOptions: {
+      // 禁用某些项
       type: Array,
       default: () => []
     },
@@ -51,9 +53,21 @@ export default {
   },
   methods: {
     getOptionDisabled(item) {
-      return this.disabled || // 全局disabled
-      this.disabledOptions.findIndex(x => x === item) >= 0 || // 判断Item是否在禁用里面
-      this.disabledOptions.findIndex(x => this.getOptionValue(x) === this.getOptionValue(item)) >= 0
+      return (
+        this.disabled || // 全局disabled
+        this.disabledOptions.findIndex(x => x === item) >= 0 || // 判断Item是否在禁用里面
+        this.disabledOptions.findIndex(x => {
+          let disabledOptionType = typeof x
+          if (disabledOptionType === 'object') {
+            // 有可能用户在设置disabledOptions时候对象做了拷贝,有可能object内存一样。
+            // 所以还是需要通过转换value再进行一次对比
+            return this.getOptionValue(x) === this.getOptionValue(item)
+          } else {
+            // 如果x是非object也就是表示disabledOptions是用的value来做禁用
+            return x === this.getOptionValue(item)
+          }
+        }) >= 0
+      )
       // 这里主要是为了防止用户在设置禁用的时候对禁用对象做了一次拷贝。随意还是通过getOptionValue再判断一次
     },
     updateValue() {
@@ -71,7 +85,7 @@ export default {
     },
     getOptionValue(item) {
       if (this.optionValue) {
-        let optionValueType = typeof (this.optionValue)
+        let optionValueType = typeof this.optionValue
         if (optionValueType === 'string') {
           return item[this.optionValue]
         } else if (optionValueType === 'function') {
@@ -128,22 +142,28 @@ export default {
     },
     // 反选
     reverse() {
-      this.checkedItems = this.options.filter(item => this.checkedItems.findIndex(x => x === item) < 0)
+      this.checkedItems = this.options.filter(
+        item => this.checkedItems.findIndex(x => x === item) < 0
+      )
       this.updateValue()
     }
   },
   watch: {
     checked: {
-      handler: function (val, oldVal) {
+      handler: function(val, oldVal) {
         if (val !== null && val !== undefined && val !== '') {
           if (Array.isArray(val)) {
             if (val.length === 0) {
               this.checkedItems.length = 0
             } else {
-              this.checkedItems = this.options.filter(item => val.includes(this.getOptionValue(item)))
+              this.checkedItems = this.options.filter(item =>
+                val.includes(this.getOptionValue(item))
+              )
             }
           } else {
-            this.checkedItems = this.options.filter(item => val === this.getOptionValue(item))
+            this.checkedItems = this.options.filter(
+              item => val === this.getOptionValue(item)
+            )
           }
         } else {
           this.checkedItems.length = 0
