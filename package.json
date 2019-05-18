@@ -1,7 +1,7 @@
 {
   "name": "v-checkbox-group",
   "description": "A vue checkbox group components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "frank <zc_smile@outlook.com>",
   "license": "MIT",
   "private": false,

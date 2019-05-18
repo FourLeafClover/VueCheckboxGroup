@@ -1,6 +1,6 @@
 # v-checkbox-group
 
-> A Vue.js project
+> https://github.com/FourLeafClover/VueCheckboxGroup
 
 ## Build Setup
 
