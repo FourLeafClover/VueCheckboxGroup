@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       options: ['IPhone', 'Makbook', 'GooglePlex'],
-      selected: null
+      selected: 'Makbook'
     }
   }
 }

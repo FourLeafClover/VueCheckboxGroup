@@ -170,7 +170,7 @@ export default {
         }
       },
       deep: true,
-      immediate: false
+      immediate: true
     }
   },
   components: {

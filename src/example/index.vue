@@ -7,6 +7,7 @@
     <demo5></demo5>
     <demo6></demo6>
     <demo7></demo7>
+    <demo8></demo8>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ import demo4 from './demo4'
 import demo5 from './demo5'
 import demo6 from './demo6'
 import demo7 from './demo7'
+import demo8 from './demo8'
 export default {
   name: 'app',
   components: {
@@ -27,7 +29,8 @@ export default {
     demo4,
     demo5,
     demo6,
-    demo7
+    demo7,
+    demo8
   }
 }
 </script>

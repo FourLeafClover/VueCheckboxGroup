@@ -3,7 +3,6 @@
     <h3>部分禁用</h3>
     <checkboxGroup
       :options="options"
-      v-model="selected"
       optionLabel="name"
       :optionValue="optionValue"
       :disabledOptions="[this.options[0],this.options[2]]"
@@ -11,7 +10,6 @@
     <br/>
     <checkboxGroup
       :options="options"
-      v-model="selected"
       optionLabel="name"
       optionValue="id"
       :disabledOptions="[1,3]"
@@ -39,8 +37,7 @@ export default {
           id: 3,
           name: 'Mars'
         }
-      ],
-      selected: []
+      ]
     }
   },
   methods: {

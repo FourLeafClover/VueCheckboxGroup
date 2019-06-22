@@ -1,7 +1,7 @@
 {
   "name": "v-checkbox-group",
   "description": "A vue checkbox group components",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "frank <zc_smile@outlook.com>",
   "license": "MIT",
   "private": false,
@@ -29,6 +29,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-3": "^6.24.1",
     "cross-env": "^5.0.5",
